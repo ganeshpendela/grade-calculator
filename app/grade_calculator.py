@@ -30,6 +30,7 @@ class GradeCalculator:
             return course_grade
         
         
+        #new function
     @staticmethod
     def calculate_optimistic_course_percentage(grades:Grades, weights:GradeWeights) -> float:
         """
