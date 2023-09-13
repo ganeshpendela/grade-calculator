@@ -12,3 +12,4 @@ class GradeWeights:
         self.midterm = 0.2
         self.project = 0.4
         self.final = 0.3
+    

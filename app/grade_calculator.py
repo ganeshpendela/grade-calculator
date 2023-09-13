@@ -30,7 +30,7 @@ class GradeCalculator:
             return course_grade
         
         
-        #new function
+        
     @staticmethod
     def calculate_optimistic_course_percentage(grades:Grades, weights:GradeWeights) -> float:
         """
@@ -83,3 +83,57 @@ class GradeCalculator:
             return 'D'
         else:
             return 'F'
+        
+    @staticmethod
+    def minimum_average_points(grades:Grades, weights:GradeWeights):
+        """"
+        calculates the minimum average points for all yet ungraded
+        assignments to still get an A in class
+        """
+        present_coursegrade=0
+        total_nongradedmarks=0
+        graded_assignments=[]
+        non_grades_assignments=[]
+        if grades.quiz_1 is None:
+            non_grades_assignments.append("quiz_1")
+            total_nongradedmarks+=(weights.quizzes)/2
+        elif grades.quiz_1!=None:
+            graded_assignments.append("quiz_1")
+            present_coursegrade+=((grades.quiz_1)/2) * weights.quizzes
+        if grades.quiz_2 is None:
+            non_grades_assignments.append("quiz_2")
+            total_nongradedmarks+=(weights.quizzes)/2
+        elif grades.quiz_2!=None:
+            graded_assignments.append("quiz_2")
+            present_coursegrade+=((grades.quiz_2)/2) * weights.quizzes
+        if grades.midterm is None:
+            non_grades_assignments.append("midterm")
+            total_nongradedmarks+=weights.midterm
+        elif grades.midterm!=None:
+            graded_assignments.append("midterm")
+            present_coursegrade+=grades.midterm * weights.midterm
+        if grades.project is None:
+            non_grades_assignments.append("project")
+            total_nongradedmarks+=weights.project
+        elif grades.project!=None:
+            graded_assignments.append("project")
+            present_coursegrade+=grades.project * weights.project
+        if grades.final is None:
+            non_grades_assignments.append("final")
+            total_nongradedmarks+=weights.project
+        elif grades.final!=None:
+            graded_assignments.append("final")
+            present_coursegrade+=grades.final*weights.final
+        print("Graded Assignments are : ", graded_assignments)
+        print("Non Graded Assignments are : ", non_grades_assignments)
+        print("Your Present Course Grade : ", present_coursegrade)
+        needed_percentage=0.91-present_coursegrade
+        if(total_nongradedmarks<needed_percentage):
+            print("You cannot get a A grade even you score full marks in next assignments")
+        else:   
+            print("needed total points you get in all the remaining assignment is : ",needed_percentage)
+
+        
+        
+
+        
